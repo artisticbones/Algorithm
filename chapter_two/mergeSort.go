@@ -1,5 +1,9 @@
 package chapter_two
 
+// MergeSort
+// 分解： 分解待排序的 n 个元素的序列成各具 n/2 个元素的两个字序列
+// 解决： 使用归并排序递归地排序两个子序列
+// 合并： 合并两个已排序的子序列以产生已排序的答案
 func MergeSort(arr []int) []int {
 	if arr == nil {
 		return nil
