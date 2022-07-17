@@ -1,4 +1,4 @@
-package structures
+package leetcode
 
 import "fmt"
 

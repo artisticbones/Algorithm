@@ -1,10 +1,10 @@
-package _083_Remove_Duplicates_from_Sorted_List
+package leetcode
 
 import (
 	"fmt"
-	"github.com/artisticbones/Algorithm/exercise/leetcode/structures"
-	. "github.com/smartystreets/goconvey/convey"
 	"testing"
+
+	. "github.com/smartystreets/goconvey/convey"
 )
 
 type question83 struct {
@@ -48,7 +48,7 @@ func Test_deleteDuplicates(t *testing.T) {
 
 		for _, q := range qs {
 			_, p := q.ans83, q.para83
-			fmt.Printf("【input】:%v       【output】:%v\n", p, structures.List2Ints(deleteDuplicates(structures.Ints2List(p.one))))
+			fmt.Printf("【input】:%v       【output】:%v\n", p, List2Ints(deleteDuplicates(Ints2List(p.one))))
 		}
 		fmt.Printf("\n\n\n")
 	})

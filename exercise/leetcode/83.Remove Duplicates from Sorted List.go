@@ -1,8 +1,4 @@
-package _083_Remove_Duplicates_from_Sorted_List
-
-import "github.com/artisticbones/Algorithm/exercise/leetcode/structures"
-
-type ListNode = structures.ListNode
+package leetcode
 
 func deleteDuplicates(head *ListNode) *ListNode {
 	cur := head
