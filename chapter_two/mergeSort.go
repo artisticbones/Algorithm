@@ -40,3 +40,36 @@ func merge(left, right []int) (ret []int) {
 	}
 	return
 }
+
+func MergeSort_1(a []int) []int {
+	if a == nil {
+		return nil
+	}
+	if len(a) == 1 {
+		return a
+	}
+	return Merge(MergeSort(a[:len(a)/2]), MergeSort(a[len(a)/2:]))
+}
+
+func Merge(left []int, right []int) []int {
+	i, j := 0, 0
+	ret := make([]int, 0, len(left)+len(right))
+	for len(left) != 0 && len(right) != 0 {
+		if left[i] < right[j] {
+			ret = append(ret, left[i])
+			i++
+		} else {
+			ret = append(ret, right[j])
+			j++
+		}
+	}
+	for i <= len(left)-1 {
+		ret = append(ret, left[i])
+		i++
+	}
+	for j <= len(right)-1 {
+		ret = append(ret, right[j])
+		j++
+	}
+	return ret
+}
