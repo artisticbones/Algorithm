@@ -9,11 +9,12 @@ func InsertSort(a []int) []int {
 	}
 	for i := 1; i < len(a); i++ {
 		j := i - 1
-		for j >= 0 && a[j] > a[i] {
+		current := a[i]
+		for j >= 0 && a[j] > current {
 			a[j+1] = a[j]
 			j--
 		}
-		a[j+1] = a[i]
+		a[j+1] = current
 	}
 	return a
 }
