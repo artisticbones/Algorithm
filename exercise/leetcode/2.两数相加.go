@@ -14,25 +14,24 @@ package leetcode
  *     Next *ListNode
  * }
  */
+
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	var head, tail *ListNode
 	var carry int
 	for l1 != nil || l2 != nil {
 		n1, n2 := 0, 0
 		if l1 != nil {
-			l1.Val = n1
-			l1.Next = l1
+			n1 = l1.Val
+			l1 = l1.Next
 		}
 		if l2 != nil {
-			l2.Val = n2
-			l2.Next = l2
+			n2 = l2.Val
+			l2 = l2.Next
 		}
 		sum := n1 + n2 + carry
 		sum, carry = sum%10, sum/10
 		if head == nil {
-			head = &ListNode{
-				Val: sum,
-			}
+			head = &ListNode{Val: sum}
 			tail = head
 		} else {
 			tail.Next = &ListNode{Val: sum}
