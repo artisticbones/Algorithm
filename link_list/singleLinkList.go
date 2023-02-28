@@ -107,3 +107,100 @@ func (l *LinkList) PopBack() int {
 	p.Next = nil
 	return data
 }
+
+func (l *LinkList) Front() int {
+	if l == nil {
+		panic("the pointer you access is nil")
+	}
+	return l.Head.Data
+}
+
+func (l *LinkList) Back() int {
+	if l == nil {
+		panic("the pointer you access is nil")
+	}
+	p := l.Head
+	for p.Next != nil {
+		p = p.Next
+	}
+	return p.Data
+}
+
+func (l *LinkList) Insert(index, value int) {
+	if l == nil {
+		panic("the pointer you access is nil")
+	}
+	if index < 0 || index > l.size-1 {
+		panic("index out of range")
+	}
+	p := &Node{
+		Data: value,
+		Next: nil,
+	}
+	q := l.Head
+	for index > 0 {
+		q = q.Next
+		index--
+	}
+	p.Next = q.Next
+	q.Next = p
+	l.size++
+}
+
+func (l *LinkList) Erase(index int) {
+	if l == nil {
+		panic("the pointer you access is nil")
+	}
+	if index < 0 || index > l.size-1 {
+		panic("index out of range")
+	}
+	q := l.Head
+	for index > 0 {
+		q = q.Next
+		index--
+	}
+	q.Next = q.Next.Next
+	l.size--
+}
+
+func (l *LinkList) ValueNFromEnd(n int) int {
+	if l == nil {
+		panic("the pointer you access is nil")
+	}
+	index := l.size - n - 1
+	if index < 0 || index > l.size-1 {
+		panic("index out of range")
+	}
+	q := l.Head
+	for index != 0 {
+		q = q.Next
+		index--
+	}
+	return q.Data
+}
+
+func (l *LinkList) Reverse() {
+
+}
+
+func (l *LinkList) RemoveValue(value int) bool {
+	if l == nil {
+		panic("the pointer you access is nil")
+	}
+	p := l.Head
+	for p.Next.Next != nil {
+		if p.Data == value {
+			p.Next = p.Next.Next
+			l.size--
+			return true
+		} else {
+			continue
+		}
+	}
+	if p.Next.Data == value {
+		p.Next = nil
+		l.size--
+		return true
+	}
+	return false
+}
