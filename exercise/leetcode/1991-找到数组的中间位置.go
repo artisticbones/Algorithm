@@ -17,14 +17,10 @@ func pivotIndex(nums []int) int {
 	}
 	left := 0
 	for i := 0; i < len(nums); i++ {
-		if i-1 < 0 {
-			left += 0
-		} else {
-			left += nums[i-1]
-		}
 		if total-nums[i] == 2*left {
 			return i
 		}
+		left += nums[i]
 	}
 	return -1
 }
