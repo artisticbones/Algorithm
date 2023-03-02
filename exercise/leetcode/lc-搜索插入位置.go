@@ -6,7 +6,7 @@ package leetcode
 */
 
 func binarySearch(nums []int, start, end int, target int) int {
-	mid := start + (end-start)/2
+	mid := start + (end-start)>>1
 	if mid == start && mid == end {
 		if nums[mid] < target {
 			return start + 1
