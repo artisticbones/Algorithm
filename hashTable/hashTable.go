@@ -135,3 +135,50 @@ func (t *HashTable) Add(key, value interface{}) {
 		}
 	}
 }
+
+func (t *HashTable) Get(key interface{}) (value interface{}) {
+	h := t.hash(key, t.size)
+	node := t.table[h]
+	for node != nil {
+		if node.key == key {
+			value = node.value
+			return
+		}
+		node = node.next
+	}
+	return nil
+}
+
+func (t *HashTable) Exists(key interface{}) bool {
+	h := t.hash(key, t.size)
+	node := t.table[h]
+	if node == nil {
+		return false
+	} else {
+		for node != nil {
+			if node.key == key {
+				return true
+			}
+			node = node.next
+		}
+		return false
+	}
+}
+
+func (t *HashTable) Remove(key interface{}) {
+	h := t.hash(key, t.size)
+	node := t.table[h]
+	var prev *ListNode
+	for node != nil {
+		if node.key == key {
+			if prev != nil {
+				prev.next = node.next
+			} else {
+				t.table[h] = node.next
+			}
+			return
+		}
+		prev = node
+		node = node.next
+	}
+}
