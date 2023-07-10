@@ -5,7 +5,7 @@ func swap(i, j int) { i, j = j, i }
 func Partition(array []int, p, q int) int {
 	sential := array[p]
 	i := p
-	for j := p + 1; j < p; j++ {
+	for j := p + 1; j < q; j++ {
 		if array[j] <= sential {
 			continue
 		}
