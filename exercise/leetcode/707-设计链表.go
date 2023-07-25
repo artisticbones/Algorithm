@@ -23,7 +23,7 @@ type MyLinkedList struct {
 func Constructor() MyLinkedList {
 	return MyLinkedList{
 		length: 0,
-		head:   nil,
+		head:   &node{},
 	}
 }
 
@@ -50,16 +50,15 @@ func (l *MyLinkedList) AddAtIndex(index int, val int) {
 	if index > l.length {
 		return
 	}
+	index = max(index, 0)
 	prev := l.head
 	for i := 0; i < index; i++ {
 		prev = prev.next
 	}
 
-	p := &node{
-		val:  val,
-		next: prev.next,
-	}
+	p := &node{val: val, next: prev.next}
 	prev.next = p
+	l.length++
 }
 
 func (l *MyLinkedList) DeleteAtIndex(index int) {
