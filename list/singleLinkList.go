@@ -1,4 +1,4 @@
-package link_list
+package list
 
 /*
 size() —— 返回链表中数据元素的个数
