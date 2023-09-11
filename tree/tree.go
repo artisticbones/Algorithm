@@ -11,6 +11,14 @@ type treeNode struct {
 	right *treeNode
 }
 
+func NewBSTNode(val int) *treeNode {
+	return &treeNode{
+		val:   val,
+		left:  nil,
+		right: nil,
+	}
+}
+
 type tree struct {
 	root *treeNode
 }
@@ -19,13 +27,54 @@ func NewBinarySearchTree() *tree {
 	return &tree{}
 }
 
-func (t *tree) Insert(val int) {
+func (t *tree) insertRecursive(root *treeNode, val int) *treeNode {
+	if root == nil {
+		return &treeNode{val: val, right: nil, left: nil}
+	}
+	if val <= root.val {
+		root.right = t.insertRecursive(root.right, val)
+	} else {
+		root.left = t.insertRecursive(root.left, val)
+	}
+	return root
+}
 
+func (t *tree) Insert_2(val int) {
+	t.root = t.insertRecursive(t.root, val)
+}
+
+func (t *tree) Insert(val int) {
+	if t.root == nil {
+		t.root = &treeNode{
+			val:   val,
+			left:  nil,
+			right: nil,
+		}
+	}
+	cur := t.root
+	for {
+		if val <= cur.val {
+			if cur.left != nil {
+				cur = cur.left
+			} else {
+				cur.left = &treeNode{val: val, left: nil, right: nil}
+				return
+			}
+		} else {
+			if cur.right != nil {
+				cur = cur.right
+			} else {
+				cur.right = &treeNode{val: val, left: nil, right: nil}
+				return
+			}
+		}
+	}
 }
 
 // GetNodeCount 查找树上的节点数
 func (t *tree) GetNodeCount() int {
-	return 0
+	total := 0
+	return total
 }
 
 // PrintValues 从小到大打印树中节点的值
@@ -44,7 +93,8 @@ func (t *tree) IsInTree(val int) bool {
 
 // GetHeight 返回节点所在的高度（如果只有一个节点，那么高度则为1）
 func (t *tree) GetHeight() int {
-
+	height := 0
+	return height
 }
 
 // GetMin 返回树上的最小值
@@ -58,7 +108,7 @@ func (t *tree) GetMax() int {
 }
 
 func (t *tree) IsBinarySearchTree() bool {
-
+	return false
 }
 
 func (t *tree) DeleteValue(val int) {
