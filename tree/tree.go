@@ -71,24 +71,45 @@ func (t *tree) Insert(val int) {
 	}
 }
 
+func (t *tree) getNodeCount(root *treeNode) int {
+	if root == nil {
+		return 0
+	}
+	return 1 + t.getNodeCount(root.right) + t.getNodeCount(root.left)
+}
+
 // GetNodeCount 查找树上的节点数
 func (t *tree) GetNodeCount() int {
-	total := 0
-	return total
+	return t.getNodeCount(t.root)
 }
 
 // PrintValues 从小到大打印树中节点的值
 func (t *tree) PrintValues() {
-
+	t.dfsInOrder(t.root)
 }
 
 func (t *tree) DeleteTree() {
+	t.root = nil
+}
 
+func (t *tree) search(node *treeNode, val int) bool {
+	if node == nil {
+		return false
+	}
+	switch {
+	case val == node.val:
+		return true
+	case val < node.val:
+		return t.search(node.left, val)
+	case val > node.val:
+		return t.search(node.right, val)
+	}
+	return false
 }
 
 // IsInTree 判断值是否存在于树中
 func (t *tree) IsInTree(val int) bool {
-	return false
+	return t.search(t.root, val)
 }
 
 // GetHeight 返回节点所在的高度（如果只有一个节点，那么高度则为1）
@@ -99,12 +120,26 @@ func (t *tree) GetHeight() int {
 
 // GetMin 返回树上的最小值
 func (t *tree) GetMin() int {
-
+	if t.root == nil {
+		return -1
+	}
+	cur := t.root
+	for cur.left != nil {
+		cur = cur.left
+	}
+	return cur.val
 }
 
 // GetMax 返回树上的最大值
 func (t *tree) GetMax() int {
-
+	if t.root == nil {
+		return -1
+	}
+	cur := t.root
+	for cur.right != nil {
+		cur = cur.right
+	}
+	return cur.val
 }
 
 func (t *tree) IsBinarySearchTree() bool {
