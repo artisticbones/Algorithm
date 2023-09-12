@@ -3,6 +3,7 @@ package tree
 import (
 	"container/list"
 	"fmt"
+	"math"
 )
 
 type treeNode struct {
@@ -112,10 +113,39 @@ func (t *tree) IsInTree(val int) bool {
 	return t.search(t.root, val)
 }
 
+func (t *tree) getHeight(root *treeNode) int {
+	if root == nil {
+		return -1
+	}
+	return int(math.Max(float64(t.getHeight(root.left)), float64(t.getHeight(root.right)))) + 1
+}
+
 // GetHeight 返回节点所在的高度（如果只有一个节点，那么高度则为1）
+// height of node: 从节点到叶子结点的最长简单路径边的条数
+// depth of node: 从节点到根节点的最长简单路径边的条数
 func (t *tree) GetHeight() int {
 	height := 0
 	return height
+}
+
+func (t *tree) getMinRecursive(root *treeNode) int {
+	if root == nil {
+		return -1
+	}
+	if root.left == nil {
+		return root.val
+	}
+	return t.getMinRecursive(root.left)
+}
+
+func (t *tree) getMinIterate(cur *treeNode) int {
+	if cur == nil {
+		return -1
+	}
+	for cur.left != nil {
+		cur = cur.left
+	}
+	return cur.val
 }
 
 // GetMin 返回树上的最小值
