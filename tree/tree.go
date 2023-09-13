@@ -93,24 +93,24 @@ func (t *tree) DeleteTree() {
 	t.root = nil
 }
 
-func (t *tree) search(node *treeNode, val int) bool {
+func (t *tree) search(node *treeNode, val int) *treeNode {
 	if node == nil {
-		return false
+		return node
 	}
 	switch {
 	case val == node.val:
-		return true
+		return node
 	case val < node.val:
 		return t.search(node.left, val)
 	case val > node.val:
 		return t.search(node.right, val)
 	}
-	return false
+	return nil
 }
 
 // IsInTree 判断值是否存在于树中
 func (t *tree) IsInTree(val int) bool {
-	return t.search(t.root, val)
+	return t.search(t.root, val) != nil
 }
 
 func (t *tree) getHeight(root *treeNode) int {
@@ -148,16 +148,26 @@ func (t *tree) getMinIterate(cur *treeNode) int {
 	return cur.val
 }
 
+func (t *tree) findMin(node *treeNode) *treeNode {
+	for node.left != nil {
+		node = node.left
+	}
+	return node
+}
+
 // GetMin 返回树上的最小值
 func (t *tree) GetMin() int {
 	if t.root == nil {
 		return -1
 	}
-	cur := t.root
-	for cur.left != nil {
-		cur = cur.left
+	return t.findMin(t.root).val
+}
+
+func (t *tree) findMax(node *treeNode) *treeNode {
+	for node.right != nil {
+		node = node.right
 	}
-	return cur.val
+	return node
 }
 
 // GetMax 返回树上的最大值
@@ -165,24 +175,87 @@ func (t *tree) GetMax() int {
 	if t.root == nil {
 		return -1
 	}
-	cur := t.root
-	for cur.right != nil {
-		cur = cur.right
+	return t.findMax(t.root).val
+}
+
+func (t *tree) isBstUtil(root *treeNode, minValue, maxValue int) bool {
+	if root == nil {
+		return true
 	}
-	return cur.val
+	if root.val < minValue && root.val > maxValue {
+		return false
+	}
+	return t.isBstUtil(root.left, minValue, root.val) && t.isBstUtil(root.right, root.val, maxValue)
 }
 
 func (t *tree) IsBinarySearchTree() bool {
-	return false
+	return t.isBstUtil(t.root, -math.MaxInt64, math.MaxInt64)
+}
+
+func (t *tree) deleteValue(root *treeNode, val int) *treeNode {
+	if root == nil {
+		return root
+	}
+	if val < root.val {
+		root.left = t.deleteValue(root.left, val)
+	} else if val > root.val {
+		root.right = t.deleteValue(root.right, val)
+	} else {
+		//Get ready to be deleted
+		if root.left == nil && root.right == nil {
+			// case 1: the node has no child
+			root = nil
+		} else if root.left == nil {
+			// case 2: the node has one child
+			root = root.right
+		} else if root.right == nil {
+			// case 2: the node has one child
+			root = root.left
+		} else {
+			// case 3: the node has three child
+			minNode := t.findMin(root.right)
+			root.val = minNode.val
+			root.right = t.deleteValue(root.right, minNode.val)
+		}
+	}
+	return root
 }
 
 func (t *tree) DeleteValue(val int) {
+	t.deleteValue(t.root, val)
+}
 
+// getSuccessor find in order successor in a BST
+func (t *tree) getSuccessor(root *treeNode, val int) *treeNode {
+	// Search the Node - O(H)
+	current := t.search(root, val)
+	if current == nil {
+		return nil
+	}
+	if current.right != nil {
+		// Case 1: the node has right tree
+		return t.findMin(current.right) // find the deepest left node in the right subtree
+	} else {
+		// Case 2: No right subtree
+		var (
+			ancestor            = root
+			successor *treeNode = nil
+		)
+		for ancestor != current {
+			if current.val < ancestor.val {
+				successor = ancestor // so far this is the deepest node for which current node is in left
+				ancestor = ancestor.left
+			} else {
+				ancestor = ancestor.right
+			}
+		}
+		return successor
+	}
 }
 
 // GetSuccessor 返回给定值的后继者，若没有则返回-1
 func (t *tree) GetSuccessor(val int) int {
-
+	return t.getSuccessor(t.root, val).val
 }
 
 // BFS 广度优先遍历
