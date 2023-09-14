@@ -1,4 +1,4 @@
-package chapter_two
+package chapter_eight
 
 import (
 	. "github.com/smartystreets/goconvey/convey"

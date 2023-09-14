@@ -1,4 +1,4 @@
-package chapter_two
+package chapter_eight
 
 // MergeSort
 // 分解： 分解待排序的 n 个元素的序列成各具 n/2 个元素的两个字序列

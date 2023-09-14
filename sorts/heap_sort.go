@@ -1,10 +1,8 @@
-package chaptersix
+package chapter_eight
 
 func left(root int) int { return 2*root + 1 }
 
 func right(root int) int { return 2*root + 2 }
-
-func swap(i, j *int) { *i, *j = *j, *i }
 
 func MaxHeapify(array []int, index int) {
 	// get children's index

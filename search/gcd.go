@@ -1,4 +1,4 @@
-package chapter_one
+package search
 
 func Gcd(p, q int) int {
 	if q == 0 {

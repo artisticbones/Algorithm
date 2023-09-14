@@ -1,4 +1,4 @@
-package chapter_two
+package chapter_eight
 
 func InsertSort(a []int) []int {
 	if a == nil {

@@ -1,4 +1,4 @@
-package chapter_one
+package search
 
 import (
 	. "github.com/smartystreets/goconvey/convey"

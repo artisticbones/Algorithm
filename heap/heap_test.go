@@ -1,4 +1,4 @@
-package extra
+package heap
 
 import (
 	. "github.com/smartystreets/goconvey/convey"

@@ -1,4 +1,4 @@
-package chapter_one
+package search
 
 // BinarySearch
 // num: the number needs to locate

@@ -1,6 +1,4 @@
-package chapter_three
-
-func swap(i, j int) { i, j = j, i }
+package chapter_eight
 
 func Partition(array []int, p, q int) int {
 	sential := array[p]
@@ -10,9 +8,9 @@ func Partition(array []int, p, q int) int {
 			continue
 		}
 		i++
-		swap(array[i], array[j])
+		swap(&array[i], &array[j])
 	}
-	swap(sential, array[i])
+	swap(&sential, &array[i])
 	return i
 }
 
