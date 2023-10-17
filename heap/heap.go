@@ -86,7 +86,7 @@ func BuildHeap(arr []int) Heap {
 	return h
 }
 
-func HeapSort(array []int) {
+func Sort(array []int) {
 	heap := BuildHeap(array)
 	var sortedArr []int
 	for len(heap) > 0 {
