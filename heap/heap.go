@@ -2,17 +2,17 @@ package heap
 
 import "fmt"
 
-type Heap []int
+type HeapArray []int
 
-func (h Heap) swap(i, j int) {
+func (h HeapArray) swap(i, j int) {
 	h[i], h[j] = h[j], h[i]
 }
 
-func (h Heap) less(i, j int) bool {
+func (h HeapArray) less(i, j int) bool {
 	return h[i] < h[j]
 }
 
-func (h Heap) Up(i int) {
+func (h HeapArray) Up(i int) {
 	for {
 		parent := (i - 1) / 2
 		if i == parent || h.less(parent, i) {
@@ -24,12 +24,12 @@ func (h Heap) Up(i int) {
 }
 
 // Push 指针传递的意义，保证函数外也起到作用
-func (h *Heap) Push(x int) {
+func (h *HeapArray) Push(x int) {
 	*h = append(*h, x)
 	h.Up(len(*h) - 1)
 }
 
-func (h Heap) down(i int) {
+func (h HeapArray) down(i int) {
 	for {
 		l := 2*i + 1 // 左孩子
 		r := 2*i + 2 // 右孩子
@@ -49,7 +49,7 @@ func (h Heap) down(i int) {
 	}
 }
 
-func (h *Heap) Remove(i int) (int, bool) {
+func (h *HeapArray) Remove(i int) (int, bool) {
 	if i < 0 || i > len(*h)-1 {
 		return 0, false
 	}
@@ -67,7 +67,7 @@ func (h *Heap) Remove(i int) (int, bool) {
 	return x, true
 }
 
-func (h *Heap) Pop() int {
+func (h *HeapArray) Pop() int {
 	x, ok := h.Remove(0)
 	if !ok {
 		return 0
@@ -75,8 +75,8 @@ func (h *Heap) Pop() int {
 	return x
 }
 
-func BuildHeap(arr []int) Heap {
-	h := Heap(arr)
+func BuildHeap(arr []int) HeapArray {
+	h := HeapArray(arr)
 	n := len(h)
 
 	// 从第一个非叶子节点，到根节点
@@ -93,4 +93,8 @@ func Sort(array []int) {
 		sortedArr = append(sortedArr, heap.Pop())
 	}
 	fmt.Println(sortedArr)
+}
+
+type heap struct {
+	size int
 }
