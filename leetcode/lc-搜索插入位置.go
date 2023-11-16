@@ -27,6 +27,6 @@ func binarySearch(nums []int, start, end int, target int) int {
 	return mid
 }
 
-func searchInsert(nums []int, target int) int {
+func searchAndInsert(nums []int, target int) int {
 	return binarySearch(nums, 0, len(nums)-1, target)
 }

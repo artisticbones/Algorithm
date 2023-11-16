@@ -4,7 +4,7 @@ import (
 	"math"
 )
 
-func reverse(x int) int {
+func reverseL(x int) int {
 	// 弹出末尾数字
 	var ret int
 	for x != 0 {
