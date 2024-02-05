@@ -3,7 +3,6 @@ package leetcode
 import "strconv"
 
 /*
-
  */
 func addBinary(a string, b string) string {
 	// 从低位开始运算，模拟列加法

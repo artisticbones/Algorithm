@@ -5,19 +5,21 @@ import (
 )
 
 // method_one: 袖珍计算器算法是一种用指数函数exp和对数函数ln代替平方根函数的方法。
-//我们通过有限的可以使用的数学函数，得到我们想要计算的结果。
-//func mySqrt(x int) int {
-//	var ret int
-//	if x == 0 {
-//		ret = 0
+// 我们通过有限的可以使用的数学函数，得到我们想要计算的结果。
+//
+//	func mySqrt(x int) int {
+//		var ret int
+//		if x == 0 {
+//			ret = 0
+//			return ret
+//		}
+//		ret = int(math.Exp(0.5 * math.Log(float64(x))))
+//		if (ret+1)*(ret+1) <= x {
+//			return ret + 1
+//		}
 //		return ret
 //	}
-//	ret = int(math.Exp(0.5 * math.Log(float64(x))))
-//	if (ret+1)*(ret+1) <= x {
-//		return ret + 1
-//	}
-//	return ret
-//}
+//
 // method_ two: binary search
 // 由于x平方根的整数部分ans是满足k的平方 <= x的最大k值，因此我们可以对k进行二分查找，从而得到答案。
 // 二分查找的下界为0，上界可以粗略的设定为x。在二分查找的每一步中，我们只需要比较中间元素 mid 的平方与 x 的大小关系，
