@@ -1,6 +1,8 @@
 package leetcode
 
-import "sort"
+import (
+	"container/heap"
+)
 
 type tag struct {
 	num int
@@ -36,22 +38,25 @@ func (t *tags) Pop() any {
 func topKFrequent(nums []int, k int) []int {
 	var (
 		cnt = make(map[int]int)
-		res = make([]int, 0)
-		h   = make([]tag, 0)
+		res = make([]int, k)
+		h   = &tags{}
 	)
 	for _, num := range nums {
 		cnt[num]++
 	}
+	heap.Init(h)
+
 	for num, c := range cnt {
-		h = append(h, tag{
+		heap.Push(h, tag{
 			num: num,
 			cnt: c,
 		})
+		if h.Len() > k {
+			heap.Pop(h)
+		}
 	}
-	hp := tags(h)
-	sort.Sort(hp)
 	for i := 0; i < k; i++ {
-		res = append(res, hp.Pop().(tag).num)
+		res[k-i-1] = heap.Pop(h).(tag).num
 	}
 
 	return res
