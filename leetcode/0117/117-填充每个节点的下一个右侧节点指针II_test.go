@@ -1,13 +1,13 @@
-package _16
+package _117
 
 import (
 	"fmt"
-	. "github.com/smartystreets/goconvey/convey"
+	"github.com/smartystreets/goconvey/convey"
 	"testing"
 )
 
 func Test_connect(t *testing.T) {
-	Convey("Test_connect...", t, func() {
+	convey.Convey("Test_connect...", t, func() {
 		root := &Node{
 			Val: 1,
 			Left: &Node{
@@ -18,7 +18,6 @@ func Test_connect(t *testing.T) {
 			},
 			Right: &Node{
 				Val:   3,
-				Left:  &Node{Val: 6},
 				Right: &Node{Val: 7},
 				Next:  nil,
 			},
