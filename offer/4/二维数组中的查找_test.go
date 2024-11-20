@@ -1,7 +1,7 @@
 /**
   @author: crane
   @since: 2024/11/20
-  @desc: //todo
+  @desc: test cases for 二维数组中的查找
 **/
 
 package _4
@@ -20,7 +20,6 @@ func Test_find(t *testing.T) {
 		args args
 		want bool
 	}{
-		// TODO: Add test cases.
 		{
 			name: "case 1",
 			args: args{
