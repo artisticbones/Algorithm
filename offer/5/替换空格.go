@@ -8,8 +8,9 @@ package _5
 
 // replaceBlank
 //
-//	@Description: 替换空格，先统计空格数量，然后从后往前替换
-//	@param s string
+//		@Description: 替换空格，先统计空格数量，然后从后往前替换，在合并两个数组时（包含字符串），如果从前往后替换，会导致多次移动元素，时间复杂度为O(n^2)
+//	 则我们可以考虑从后往前替换，这样只需要移动一次元素，时间复杂度为O(n)
+//		@param s string
 func replaceBlank(s string) string {
 	if s == "" {
 		return ""
