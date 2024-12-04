@@ -7,7 +7,8 @@
 package offer
 
 type BinaryTreeNode struct {
-	MNValue int
-	MPLeft  *BinaryTreeNode
-	MPRight *BinaryTreeNode
+	MNValue  int
+	MPParent *BinaryTreeNode
+	MPLeft   *BinaryTreeNode
+	MPRight  *BinaryTreeNode
 }
