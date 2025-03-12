@@ -1,6 +1,6 @@
 module github.com/artisticbones/Algorithm
 
-go 1.17
+go 1.20
 
 require github.com/smartystreets/goconvey v1.7.2
 

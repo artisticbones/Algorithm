@@ -1,6 +1,6 @@
 package leetcode
 
-//左括号
+// 左括号
 var pairs = map[byte]byte{
 	')': '(',
 	']': '[',
